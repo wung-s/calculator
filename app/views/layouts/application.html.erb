@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
   <title>Calculator</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<header class="navbar navbar-fixed-top navbar-inverse">
-	  <div class="container">
-	    <%= link_to "calculator", '#', id: "logo" %>
-	    <nav>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><%= link_to "Home",   '#' %></li>
-	        <li><%= link_to "Help",   '#' %></li>
-	        <li><%= link_to "Log in", '#' %></li>
-	      </ul>
-	    </nav>
-	  </div>
-	</header>
+   <body>
 
-<%= yield %>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <%= link_to "Calculator", "#"  %>
+                </li>
+                <li>
+                	<%= link_to "Single Semester", {controller: "static_pages", action: "semester"}  %>
+                    
+                </li>
+                <li>
+                    <%= link_to "All Semester", {controller: "static_pages", action: "all"}  %>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- <a href="#menu-toggle" class="btn btn-default btn" id="menu-toggle">Hide Navigation Bar</a> -->
+                        <!-- <div class = "row"> -->
+							<%=  yield %>
+                		<!-- </div> -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
 </body>
 </html>

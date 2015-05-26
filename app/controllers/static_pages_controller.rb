@@ -5,4 +5,7 @@ class StaticPagesController < ApplicationController
 
   def semester
   end
+
+  def all
+  end
 end
