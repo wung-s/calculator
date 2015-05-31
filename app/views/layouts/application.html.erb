@@ -22,6 +22,7 @@
                         <!-- <a href="#menu-toggle" class="btn btn-default btn" id="menu-toggle">Hide Navigation Bar</a> -->
                         <!-- <div class = "row"> -->
 							<%=  yield %>
+							<%= debug(params) if Rails.env.development? %>
                 		<!-- </div> -->
                     </div>
                 </div>
