@@ -4,10 +4,10 @@
         <li class="sidebar-brand">
         <%= link_to "Calculator", "#"  %>
         </li>
-        <li>
+        <li class="<%= is_active('semester')%>" >
        	<%= link_to "Single Semester", {controller: "static_pages", action: "semester"}  %>
         </li>
-        <li>
+        <li class="<%= is_active('all')%>">
         <%= link_to "All Semester", {controller: "static_pages", action: "all"}  %>
         </li>
         <li>
