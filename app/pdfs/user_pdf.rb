@@ -2,80 +2,114 @@
 # require "prawn/table"
 class UserPdf < Prawn::Document
 	def initialize(user)
-		super(top_margin: 70)
+		super({top_margin: 130, page_size: 'A4'})
 		@user = user
 		@slno = 001
+		sem1 = "I"
+		sem2= "II"
 		@faculty = 'Business Administration'
 		@session = 'I & II(2014-2015)'
 		@examination = 'Master of Business Administration(MBA)'
 		@medium = 'English'
+=begin
 		font_families.update("Old English" => {
  												normal: "OldeEnglish.ttf"}, 
 							"English Towne" => {
 												normal: "EnglishTowne.tff"})
+=end
 
-	#	user_name
-	#	move_down 100
-	#	grade_report
-	#	move_down 20
-	#	student_info	
-	#	move_down 10
-	#	line_items
-		# text @user.email.to_s
-	#	move_down 20
-	#	statement 
-		header_info
+		header_info sem1
+		show_current_semester sem1
+		subj_header
+		subject_marks
 
-		move_down 5
+		move_down 25
+		show_current_semester sem2
+		subj_header
 		subject_marks
-		move_down 8
-		show_result 
-		
-		move_down 10 
-		subject_marks
-		move_down 8
-		show_result
 
 		footer
-		move_down 12
+		move_down 5
 		show_warning
+#		test
+
 	end
 
 	def statement 
 		text "Statement Of Marks And Grades", size: 40, style: :bold
 	end
-	def header_info
-		data =[["Sl. No:#{@slno}", {content: "Semester/Academic Session: #{@session}", colspan: 2}], 
+	def header_info sem
+		data =[["Sl. No:#{@slno}","Status: Regular",{content: "Semester/Academic Session: #{sem}"}], 
 				["Faculty:#{@faculty}", {content: "Examination: #{@examination}", colspan: 2}], 
 				["Name: #{@name}","ID: \##{@id}", "Medium: #{@medium}"]]
 		
-		table data, {:position => :center, :column_widths => [200,170,170],:cell_style => {border_width: 0, size: 12,font_style: :bold}}
+		table data, {:position => :center, :column_widths => [184,164,174],:cell_style => {border_width: 0, size: 11}}
+
+	end
+
+	def subj_header 
+		data = [["C.Code","Course Title", "CR", {content: "Marks", colspan: 3}, "GRD", "G.PT", "NA"],
+				["","","","Int <font size='8'> 16/40</font>","Ext <font size='8'>24/60</font>","Total <font size='8'>40/100</font>", "","",""]
+				]
+		table data, {:position => :center,:cell_style => {border_width: 1,inline_format: true, size: 10}}  do
+			self.column_widths= {0 => 60,1 => 210,2 => 30,3 => 36, 4 => 36,5 => 40, 6 => 40,7 => 35, 8 => 35}
+			rows(0).font_style = :bold
+			rows(1).font_style = :italic			
+			columns(2..8).align = :center
+		end
+	
 	end
 
 	def subject_marks
-		data = [["<b>C.Code</b>","<b>Course Title</b>", "<b>CR", {content: "<b>Marks</b>", colspan: 3}, "<b>GRD</b>", "<b>G.PT</b>", "<b>NA</b>"],
-				["","","","Int 16/40","Ext 24/60","Total", "","",""], 
+		marks = make_table [[1,2,3,4,5,6,7,8,9],
+							[11,12,13,14,15,16,17,18,19]]
+		data = [ 
 				["AAA111", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
 				["AAA222", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
 				["AAA333", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
-				["", "", "", "", "", "", "", "", "" ],
-				["", "", "", "", "", "", "", "", "" ],
-				["", "", "", "", "", "", "", "", "" ], 
+				["AAA333", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
+				["AAA333", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
+				["AAA333", "Financial Accounting", 3, "--"," --"," --", "C", 12, 1],
+				["","","","","","","","",""],
+				["","","","","","","","",""],
+				["","","","","","","","",""],
 				["","<b>Grand Total Credit Hours/Grand Total Marks/Grand Total Grade Points</b>",15, {content: 370.to_s, colspan: 3, align: :right}, "", 96, ""],
-				["","<b>CGPA</b>",6.4, {content: "<b>Average:</b> ", colspan: 3}, "<b>SGPA</b>", 96, ""]
+				["","<b>CGPA</b>",6.4, {content: "<b>Average:</b> ", colspan: 3}, "<b>SGPA 5.0</b>", 96, ""],
+				["<b>RESULT</b>","PASS","",{content: "<i>**N.A: Number of Attempt</i> ", colspan: 6, align: :right}],
+				
 				]
 #		table data, width: 300,{:position => :center, :column_widths => [100,200,1],:cell_style => {border_width: 1}} 
-	table data, {:position => :center,:cell_style => {border_width: 0,inline_format: true, size: 10}, column_widths: [80,210,30,30,30,40,45,40,35,]}
-	#	table (data) do 
-	#		cells.borders = []
-	#	end
+		table data, {:position => :center,:cell_style => {inline_format: true, size: 10, height: 15, padding: [0,0,0,4]}}  do
+			self.column_widths= {0 => 60,1 => 210,2 => 30,3 => 36, 4 => 36,5 => 40, 6 => 40,7 => 35, 8 => 35}
+			#row(0).font_style = :bold
+			cells.borders = [:left]
+			columns(8).borders = [:right,:left]
+			columns(2..8).align = :center
+			rows(0).padding = [4,0,0,4]
+			rows(-3).borders = [:right,:left,:top]
+			rows(-2).borders = [:right,:left,:top]
+			rows(-1).borders = [:bottom,:left, :right,:top]
+			#row(3).height = 5
+		end
+	end
+
+=begin
+	def test
+		data = [[1,2,3],[4,5,6]]
+		table data, width: 520 do 
+			row(0).font_style = :bold
+			
+		end
+	end
+=end
+	def show_current_semester sem
+		text "SEMESTER - #{sem}", size: 12, style: :bold, align: :center
 	end
 
 	def show_result
 	#	font("#{Prawn::DATADIR}/fonts/OldeEnglish.ttf") do
  	#	text "RESULT."
 	#	end
-
 		text "RESULT", size: 12, style: :bold
 	end
 
@@ -86,12 +120,14 @@ class UserPdf < Prawn::Document
 		
 		data = [["Date: "+ @date, ""], 
 				["Place: Pune",{content: "<font name='Helvetica-Bold'>Controller Of Examination, SAU</font>", align: :right}]]
-		table data, {position: :left, column_widths: [120,420],cell_style: {border_width: 0, font_style: :bold, inline_format: true}}
+		table data, {position: :left, column_widths: [123,400],cell_style: {border_width: 0, font_style: :bold, inline_format: true}} do 
+
+			end
 
 	end
 
 	def show_warning
-		str = "<u>*** Any Alteration or overwriting is illegal and makes this statemt of Marks and Grades Invalid #{Prawn::DATADIR} ***</u>"
+		str = "<u>*** Any Alteration or overwriting is illegal and makes this statemt of Marks and Grades Invalid ***</u>"
 		text str, size: 10, style: :italic, align: :center, inline_format: true
 		# text str, size: 10, style: "Times-Roman", align: :center
 	

@@ -17,10 +17,12 @@ class StaticPagesController < ApplicationController
       format.pdf do 
         pdf = UserPdf.new(@user)
         # pdf.text "hello world"
-        #send_data pdf.render, filename: "test_file",
-         #                     type: "application/pdf",
-          #                    disposition: "attachment"
-          send_data pdf.render
+        
+        send_data pdf.render, filename: "test_file",
+                            type: "application/pdf",
+                            disposition: "inline"
+        
+        #  send_data pdf.render
       end
 
     end
