@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  regno: 9.99
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  email: MyString
+  address: MyText
+  state: MyString
+  pincode: 9.99
+  emergency_no: 9.99
+
+two:
+  regno: 9.99
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  email: MyString
+  address: MyText
+  state: MyString
+  pincode: 9.99
+  emergency_no: 9.99
