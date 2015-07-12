@@ -1,0 +1,191 @@
+<% provide(:page_title, "Registration") %>
+<% provide(:page_header, "Student Registration")  %>
+<% provide(:page_header_description, "New Student")  %>
+
+
+<div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">General Information</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
+    <!-- <form class="form-horizontal"> -->
+    <%= form_for @student, url: {action: "create"}, html: {class: "form-horizontal"} do |f| %>
+      <div class="box-body">
+        <div class="form-group">
+              <label for="first_name" class="col-sm-2 control-label">Name</label>
+	          <div class="col-sm-10">
+	          		<%= f.text_field :first_name, class: "form-control",placeholder: "first name"  %>
+	          		<%= f.text_field :middle_name, class: "form-control",placeholder: "middle name"  %>
+	          		<%= f.text_field :last_name, class: "form-control",placeholder: "last name"  %>
+	          </div>
+	    	
+        </div>
+        <div class="form-group">
+        	<label for="email" class="col-sm-2 control-label">Email</label>
+        	<div class="col-sm-10">
+        		<%= f.text_field :email, class: "form-control",placeholder: "email"  %>
+			</div>
+	    </div>
+        <div class="form-group">
+		    <label class="col-sm-2 control-label">Address</label>
+		    <div class="col-sm-10" >
+		    		<%= f.text_area :address, size: "3x3", class: "form-control"  %>
+		    </div>
+	    </div>
+	    <div class="form-group">
+	        <label for = "student_state" class="col-sm-2 control-label">State</label>
+		    <div class="col-sm-10" >
+		        <%=  f.select :state, options_for_select([["select",0], ["Manipur",1], ["Nagaland",2], ["Mizoram",3], ["Meghalaya",4], ["Sikkim",5]]), {},class: "form-control" %>
+		
+		   </div>    
+		</div>
+		<div class="form-group">
+        	<label for="inputEmail3" class="col-sm-2 control-label">Pincode</label>
+        	<div class="col-sm-10">
+        		<%=  f.number_field :pincode, class: "form-control"  %>
+			</div>
+			<!-- </div> -->
+	    </div>	    
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-default pull-right">Cancel</button>
+        <%= f.submit "Register", class: "btn btn-success pull-right" %>
+      </div><!-- /.box-footer -->
+      <% end %>
+    <!-- </form> -->
+  </div><!-- /.box -->
+  <!-- general form elements disabled -->
+
+
+<div class="box box-success">
+	<div class="box-header with-border">
+	  <h3 class="box-title">General Information</h3>
+	</div><!-- /.box-header -->
+	<div class="box-body">
+	  <form role="form">
+	    <!-- text input -->
+	    <div class="form-group">
+	      <label>Name</label>
+	      <input type="text" class="form-control" placeholder="first name"/>
+	      <input type="text" class="form-control" placeholder="middle name"/>
+	      <input type="text" class="form-control" placeholder="last name"/>
+	    </div>
+	    
+
+	    <!-- textarea -->
+	    <div class="form-group">
+	      <label>Textarea</label>
+	      <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+	    </div>
+	    <div class="form-group">
+	      <label>Textarea Disabled</label>
+	      <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
+	    </div>
+
+	    <!-- input states -->
+	    <div class="form-group has-success">
+	      <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>
+	      <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..."/>
+	    </div>
+	    <div class="form-group has-warning">
+	      <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with warning</label>
+	      <input type="text" class="form-control" id="inputWarning" placeholder="Enter ..."/>
+	    </div>
+	    <div class="form-group has-error">
+	      <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with error</label>
+	      <input type="text" class="form-control" id="inputError" placeholder="Enter ..."/>
+	    </div>
+
+	    <!-- checkbox -->
+	    <div class="form-group">
+	      <div class="checkbox">
+	        <label>
+	          <input type="checkbox"/>
+	          Checkbox 1
+	        </label>
+	      </div>
+
+	      <div class="checkbox">
+	        <label>
+	          <input type="checkbox"/>
+	          Checkbox 2
+	        </label>
+	      </div>
+
+	      <div class="checkbox">
+	        <label>
+	          <input type="checkbox" disabled/>
+	          Checkbox disabled
+	        </label>
+	      </div>
+	    </div>
+
+	    <!-- radio -->
+	    <div class="form-group">
+	      <div class="radio">
+	        <label>
+	          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+	          Option one is this and that&mdash;be sure to include why it's great
+	        </label>
+	      </div>
+	      <div class="radio">
+	        <label>
+	          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+	          Option two can be something else and selecting it will deselect option one
+	        </label>
+	      </div>
+	      <div class="radio">
+	        <label>
+	          <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled/>
+	          Option three is disabled
+	        </label>
+	      </div>
+	    </div>
+
+	    <!-- select -->
+	    <div class="form-group">
+	      <label>Select</label>
+	      <select class="form-control">
+	        <option>option 1</option>
+	        <option>option 2</option>
+	        <option>option 3</option>
+	        <option>option 4</option>
+	        <option>option 5</option>
+	      </select>
+	    </div>
+	    <div class="form-group">
+	      <label>Select Disabled</label>
+	      <select class="form-control" disabled>
+	        <option>option 1</option>
+	        <option>option 2</option>
+	        <option>option 3</option>
+	        <option>option 4</option>
+	        <option>option 5</option>
+	      </select>
+	    </div>
+
+	    <!-- Select multiple-->
+	    <div class="form-group">
+	      <label>Select Multiple</label>
+	      <select multiple class="form-control">
+	        <option>option 1</option>
+	        <option>option 2</option>
+	        <option>option 3</option>
+	        <option>option 4</option>
+	        <option>option 5</option>
+	      </select>
+	    </div>
+	    <div class="form-group">
+	      <label>Select Multiple Disabled</label>
+	      <select multiple class="form-control" disabled>
+	        <option>option 1</option>
+	        <option>option 2</option>
+	        <option>option 3</option>
+	        <option>option 4</option>
+	        <option>option 5</option>
+	      </select>
+	    </div>
+
+	  </form>
+	</div><!-- /.box-body -->
+</div><!-- /.box -->

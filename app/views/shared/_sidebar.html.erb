@@ -19,8 +19,8 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-edit"></i> <span>Registration</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#">Student</a></li>
-            <li><a href="#">Faculty</a></li>
+            <li><%= link_to(content_tag(:i, nil, class: 'fa fa-circle-o') + "Student", new_student_path) %></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Faculty</a></li>
           </ul>
         </li>
         <!-- Optionally, you can add icons to the links -->

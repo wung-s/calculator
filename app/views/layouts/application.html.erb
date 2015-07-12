@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-  <title>Calculator</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title><%= yield(:page_header) %> | SAU MANAGEMENT</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
 </head>
 <body class="skin-blue sidebar-mini" style="background-color: #FFF">
@@ -28,24 +28,33 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
               <h1>
-                Page Header
-                <small>Optional description</small>
+                <%= yield(:page_header) %>
+                <small><%= yield(:page_header_description) %></small>
               </h1>
               <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li><a href="/has"><i class="fa fa-dashboard"></i> Level</a></li>
                 <li class="active">Here</li>
               </ol>
             </section>
 
             <!-- Main content -->
             <section class="content">
-
+              <% flash.each do |message_type, message|  %>
+                  <div class="alert alert-<%= message_type %> alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>
+                      <i class="icon fa fa-check"></i>
+                      <%= message  %>
+                    </h4>
+                  </div>
+              <% end %>
               <!-- Your Page Content Here -->
               <%= yield %>  
             </section><!-- /.content -->
           </div><!-- /.content-wrapper -->
-
+          
           <%= render 'shared/footer' %>
+          <%= debug(params) if Rails.env.development? %>
           
           <!-- Control Sidebar -->      
           <%= render 'shared/control_sidebar' %>
