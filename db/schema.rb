@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710063835) do
+ActiveRecord::Schema.define(version: 20150714172803) do
 
   create_table "course_associations", force: :cascade do |t|
     t.integer  "course_id"
@@ -73,6 +73,12 @@ ActiveRecord::Schema.define(version: 20150710063835) do
   add_index "marks", ["course_id"], name: "index_marks_on_course_id"
   add_index "marks", ["student_id"], name: "index_marks_on_student_id"
 
+  create_table "states", force: :cascade do |t|
+    t.string   "name",       limit: 50
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string   "regno",         limit: 50
     t.string   "first_name",    limit: 50
@@ -80,15 +86,16 @@ ActiveRecord::Schema.define(version: 20150710063835) do
     t.string   "last_name",     limit: 50
     t.string   "email",         limit: 50
     t.text     "address",       limit: 500
-    t.string   "state",         limit: 50
     t.integer  "pincode"
-    t.integer  "emergency_no"
+    t.string   "emergency_no",  limit: 20
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "department_id"
+    t.integer  "state_id"
   end
 
   add_index "students", ["department_id"], name: "index_students_on_department_id"
+  add_index "students", ["state_id"], name: "index_students_on_state_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

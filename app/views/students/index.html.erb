@@ -4,9 +4,15 @@
 
 <div class="box">
     <div class="box-header">
-      <h3 class="box-title">Data Table With Full Features</h3>
+      <h3 class="box-title">List of Students</h3>
     </div><!-- /.box-header -->
     <div class="box-body">
+    <% form_tag students_path, :method => 'get' do %>
+      <% content_tag :label do %>
+      Search term:
+      <%= text_field_tag :search, params[:search] %>
+      <% end %>
+    <% end %>
       <table id="all_student_list_table" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -18,24 +24,18 @@
           </tr>
         </thead>
         <tbody>
-        
+          <% @students.each do |s|%>
+          <tr>
+            <td><%= s.regno  %> </td> 
+            <td><%= s.first_name.to_s + ' ' + s.last_name.to_s  %> </td> 
+            <td><%= s.department_id %></td>
+            <td><%= s.state %></td>
+            <td><%= link_to("View Details", edit_student_path(s)) %></td>
+          <% end %>        
         </tbody>
-        
-        
       </table>
+
+
+      <%=  will_paginate  %>
     </div><!-- /.box-body -->
  </div><!-- /.box -->  
-
- <script type="text/javascript">
-      $(function () {
-        // $("#example1").DataTable();
-        $('#all_student_list_table').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
