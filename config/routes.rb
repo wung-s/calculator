@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+=begin
+  get 'marks/new'
+
+  get 'marks/index'
+
+  get 'marks/edit'
+
+  get 'marks/show'
+
+  get 'marks/search'
+  get 'marks/student_upload_mark'
+=end
+
   get 'sessions/new'
   get 'users/new'
   get 'static_pages/all'
@@ -8,6 +21,8 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy'
   get 'persemester' => 'static_pages#semester'
   get 'genpdf' => 'static_pages#genpdf'
+  get 'search_student' => 'marks#search'
+  post 'import_mark' => 'marks#import'
   resources :users
   resources :students
   resources :marks

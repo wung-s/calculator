@@ -14,6 +14,8 @@ gem 'prawn-table',	        '0.2.1'
 gem 'font-awesome-sass'
 gem 'will_paginate',        '~> 3.0.5'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'roo', 					'~> 2.0.0'
+gem 'roo-xls'
 gem 'sdoc',                 '0.4.0', group: :doc
 
 group :development, :test do
