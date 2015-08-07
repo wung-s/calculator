@@ -13,18 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20150714172803) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "course_associations", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "department_id"
     t.integer  "semester",      limit: 2
-    t.integer  "credit_hour",   limit: 4
+    t.integer  "credit_hour"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
-  add_index "course_associations", ["course_id", "department_id"], name: "index_course_associations_on_course_id_and_department_id", unique: true
-  add_index "course_associations", ["course_id"], name: "index_course_associations_on_course_id"
-  add_index "course_associations", ["department_id"], name: "index_course_associations_on_department_id"
+  add_index "course_associations", ["course_id", "department_id"], name: "index_course_associations_on_course_id_and_department_id", unique: true, using: :btree
+  add_index "course_associations", ["course_id"], name: "index_course_associations_on_course_id", using: :btree
+  add_index "course_associations", ["department_id"], name: "index_course_associations_on_department_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
     t.string   "code",       limit: 50
@@ -36,14 +39,14 @@ ActiveRecord::Schema.define(version: 20150714172803) do
   create_table "credits", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "department_id"
-    t.integer  "credit_hour",   limit: 4
-    t.integer  "int4",          limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "credit_hour"
+    t.integer  "int4"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "credits", ["course_id"], name: "index_credits_on_course_id"
-  add_index "credits", ["department_id"], name: "index_credits_on_department_id"
+  add_index "credits", ["course_id"], name: "index_credits_on_course_id", using: :btree
+  add_index "credits", ["department_id"], name: "index_credits_on_department_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 100
@@ -59,19 +62,19 @@ ActiveRecord::Schema.define(version: 20150714172803) do
   end
 
   create_table "marks", force: :cascade do |t|
-    t.integer  "internal",     limit: 4
-    t.integer  "external",     limit: 4
-    t.integer  "total",        limit: 4
+    t.integer  "internal"
+    t.integer  "external"
+    t.integer  "total"
     t.string   "grade",        limit: 10
-    t.integer  "credit_point", limit: 4
+    t.integer  "credit_point"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "student_id"
     t.integer  "course_id"
   end
 
-  add_index "marks", ["course_id"], name: "index_marks_on_course_id"
-  add_index "marks", ["student_id"], name: "index_marks_on_student_id"
+  add_index "marks", ["course_id"], name: "index_marks_on_course_id", using: :btree
+  add_index "marks", ["student_id"], name: "index_marks_on_student_id", using: :btree
 
   create_table "states", force: :cascade do |t|
     t.string   "name",       limit: 50
@@ -85,17 +88,17 @@ ActiveRecord::Schema.define(version: 20150714172803) do
     t.string   "middle_name",   limit: 50
     t.string   "last_name",     limit: 50
     t.string   "email",         limit: 50
-    t.text     "address",       limit: 500
+    t.text     "address"
     t.integer  "pincode"
     t.string   "emergency_no",  limit: 20
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "department_id"
     t.integer  "state_id"
   end
 
-  add_index "students", ["department_id"], name: "index_students_on_department_id"
-  add_index "students", ["state_id"], name: "index_students_on_state_id"
+  add_index "students", ["department_id"], name: "index_students_on_department_id", using: :btree
+  add_index "students", ["state_id"], name: "index_students_on_state_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
